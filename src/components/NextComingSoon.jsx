@@ -48,3 +48,5 @@ export const NextComingSoon = () => {
         </h2>
     )
 }
+
+export default NextComingSoon

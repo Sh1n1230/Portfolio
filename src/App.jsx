@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import LastUpdated from './components/LastUpdated'
-import AnimatedText from './components/animatedtext'
+import Title from './components/Title'
 import FadeIn from './components/FadeIn'
-import { NextComingSoon } from './components/NextComingSoon';
+import NextComingSoon from './components/NextComingSoon';
 
 const projectsData = [
   {
@@ -70,7 +70,7 @@ function App() {
       </nav>
 
       <header id="top">
-        <AnimatedText />
+        <Title />
       </header>
 
       <main>
@@ -95,6 +95,10 @@ function App() {
         </FadeIn>
 
         <FadeIn>
+          <NextComingSoon />
+        </FadeIn>
+
+        <FadeIn>
           <section id="about" className="content-section">
             <h2>Shin Nakamura</h2>
             <ul>
@@ -106,9 +110,6 @@ function App() {
           </section>
         </FadeIn>
 
-        <FadeIn>
-          <NextComingSoon />
-        </FadeIn>
       </main>
 
       <FadeIn>
