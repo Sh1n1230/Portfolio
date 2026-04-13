@@ -1,0 +1,116 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* フェードインの初期状態（透明＆少し下に配置） */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  visibility: hidden;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, visibility;
+}
+
+/* フェードインの完了状態（不透明＆元の位置） */
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+/* スムーズスクロール（クリックした時にヌルッと移動する設定） */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ハンバーガーボタン（画面右上に固定） */
+.hamburger-btn {
+  position: fixed;
+  top: 20px;
+  right: 25px;
+  z-index: 1000;
+  /* メニューより上に表示 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 35px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger-btn span {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  /* 線の色 */
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+/* メニューが開いた時の「✕」への変形アニメーション */
+.hamburger-btn.open span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.hamburger-btn.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.hamburger-btn.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* 目次（フルスクリーンオーバーレイ） */
+.toc-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  /* 初期状態は画面右外に隠す */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  /* 半透明の白背景 */
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: right 0.4s ease-in-out;
+  /* スライドインのアニメーション */
+}
+
+/* メニューが開いた状態 */
+.toc-menu.open {
+  right: 0;
+}
+
+.toc-menu ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.toc-menu li {
+  margin: 30px 0;
+}
+
+.toc-menu a {
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.toc-menu a:hover {
+  color: #007bff;
+  /* ホバー時の色 */
+}

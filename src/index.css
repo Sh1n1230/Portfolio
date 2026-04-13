@@ -1,0 +1,228 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.project-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-image {
+  width: 100%;
+  /* 横幅をカードの幅に合わせる */
+  height: 200px;
+  /* 高さを固定して統一感を出す（任意） */
+  object-fit: cover;
+  /* 画像の比率を崩さず、指定したエリアを埋めるようにトリミング表示 */
+  border-radius: 6px;
+  /* 画像の角を少し丸くする */
+  margin-bottom: 1rem;
+  /* タイトルとの間に余白を空ける */
+}
+
+.carousel-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+/* 左右のボタンの共通スタイル */
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  /* 上下の中央に配置 */
+  transform: translateY(-50%);
+  /* 自身の高さの半分だけ上に戻して完全に中央合わせ */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* 半透明の黒背景 */
+  color: white;
+  /* 矢印の色は白 */
+  border: none;
+  cursor: pointer;
+  padding: 16px;
+  font-size: 18px;
+  border-radius: 50%;
+  /* 丸いボタンにする */
+  z-index: 10;
+  /* 画像より前面に表示 */
+  transition: background-color 0.3s;
+}
+
+/* インジケーター（ドット）のコンテナ */
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  /* 画像の下部に配置 */
+  left: 50%;
+  transform: translateX(-50%);
+  /* 左右の中央合わせ */
+  display: flex;
+  gap: 8px;
+  /* ドット間の隙間 */
+  z-index: 10;
+}
+
+/* 個々のドットのスタイル */
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* 半透明の白 */
+  border-radius: 50%;
+  /* 丸くする */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* 現在表示中のスライドに対応するドットは不透明の白にする */
+.dot.active {
+  background-color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #242424;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.nav-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+  color: #646cff;
+}
+
+.content-section {
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
