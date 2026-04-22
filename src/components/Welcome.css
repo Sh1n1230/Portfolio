@@ -1,0 +1,17 @@
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111;
+    display: grid;
+    place-items: center;
+    z-index: 9999;
+}
+
+.welcome-text {
+    color: #fff;
+    font-size: 4rem;
+    opacity: 0;
+}

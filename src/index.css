@@ -73,7 +73,7 @@ button:focus-visible {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: auto-fit;
   gap: 1.5rem;
   margin-top: 1rem;
 }

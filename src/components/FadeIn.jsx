@@ -5,12 +5,10 @@ const FadeIn = ({ children }) => {
     const domRef = useRef(null);
 
     useEffect(() => {
-        // 画面に要素が入ってきたかを監視するObserverを設定
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     setVisible(true);
-                    // 一度表示されたら監視を解除する（スクロールを戻しても消えないようにする）
                     observer.unobserve(domRef.current);
                 }
             });
