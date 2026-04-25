@@ -256,13 +256,25 @@ a:focus:not(:focus-visible) {
   height: 100%;
 }
 
-.tab.active {
-  background-color: #1e1e1e;
-  color: #9cdcfe;
+.tab {
+  color: #858585;
   padding: 0 20px;
   display: flex;
   align-items: center;
   font-size: 0.9rem;
+  border-top: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tab:hover {
+  background-color: #2d2d2d;
+  color: #cccccc;
+}
+
+.tab.active {
+  background-color: #1e1e1e;
+  color: #9cdcfe;
   border-top: 2px solid #007acc;
 }
 

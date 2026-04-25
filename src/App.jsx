@@ -9,8 +9,10 @@ import { ProjectCard } from './components/ProjectCard'
 import { projectsData } from './data/projects'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import { editorFiles } from './data/editorFiles'
 
 function App() {
+  const [activeFile, setActiveFile] = useState('profile.js')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showMain, setShowMain] = useState(false)
@@ -82,22 +84,32 @@ function App() {
                 <h2>About Me</h2>
                 <div className="editor-window">
                   <div className="editor-header">
-                    <div className="window-controls"><span className="control close"></span><span className="control minimize"></span><span className="control maximize"></span></div>
-                    <div className="tabs"><div className="tab active">profile.js</div></div>
+                    <div className="window-controls">
+                      <span className="control close"></span>
+                      <span className="control minimize"></span>
+                      <span className="control maximize"></span>
+                    </div>
+                    <div className="tabs">
+                      {Object.keys(editorFiles).map(fileName => (
+                        <div
+                          key={fileName}
+                          className={`tab ${activeFile === fileName ? 'active' : ''}`}
+                          onClick={() => setActiveFile(fileName)}
+                        >
+                          {fileName}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="editor-body">
-                    <div className="line-numbers">{Array.from({ length: 10 }).map((_, i) => <span key={i}>{i + 1}</span>)}</div>
-                    <div className="code-content typing-animation">
+                    <div className="line-numbers">
+                      {Array.from({ length: editorFiles[activeFile].length }).map((_, i) => (
+                        <span key={i}>{i + 1}</span>
+                      ))}
+                    </div>
+                    <div key={activeFile} className="code-content typing-animation">
                       <pre><code>
-                        <div className="line pre-typed"><span className="keyword">const</span> <span className="variable">developer</span> <span className="operator">=</span> {'{'}</div>
-                        <div className="line pre-typed">{'  '}<span className="property">name</span>: <span className="string">"Shin Nakamura"</span>,</div>
-                        <div className="line pre-typed">{'  '}<span className="property">education</span>: <span className="string">"電気通信大学 メディア情報学専攻 (2028卒)"</span>,</div>
-                        <div className="line pre-typed">{'  '}<span className="property">guild</span>: <span className="string">"X680x0同好会 (チームリーダー / Unity・Java)"</span>,</div>
-                        <div className="line" style={{ "--i": 0 }}>{'  '}<span className="property">focus</span>: <span className="string">"初見のプレイヤー視点を追求した直感的なUI/UX設計"</span>,</div>
-                        <div className="line" style={{ "--i": 1 }}>{'  '}<span className="property">licenses</span>: [<span className="string">"基本情報技術者試験"</span>, <span className="string">"実用英語技能検定準1級"</span>],</div>
-                        <div className="line" style={{ "--i": 2 }}>{'  '}<span className="property">routines</span>: [<span className="string">"映画鑑賞"</span>, <span className="string">"ウェイトトレーニング"</span>]</div>
-                        <div className="line" style={{ "--i": 3 }}>{'}'};</div>
-                        <div className="line" style={{ "--i": 4 }}><span className="keyword">export default</span> <span className="variable">developer</span>;</div>
+                        {editorFiles[activeFile]}
                       </code></pre>
                     </div>
                   </div>
