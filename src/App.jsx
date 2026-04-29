@@ -10,6 +10,8 @@ import { projectsData } from './data/projects'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { editorFiles } from './data/editorFiles'
+import { MyStatus } from './components/MyStatus';
+import { GlobalBackground } from './components/GlobalBackground';
 
 function App() {
   const [activeFile, setActiveFile] = useState('profile.js')
@@ -35,6 +37,8 @@ function App() {
 
       {showMain && (
         <>
+          <GlobalBackground />
+
           <button
             className={`hamburger-btn ${isMenuOpen ? 'open' : ''}`}
             onClick={toggleMenu}
@@ -55,6 +59,7 @@ function App() {
 
           <header id="top">
             <Title />
+            <MyStatus />
           </header>
 
           <main>
