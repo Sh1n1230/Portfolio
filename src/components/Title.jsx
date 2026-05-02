@@ -4,6 +4,7 @@ import { animate } from 'animejs';
 const Title = () => {
     const containerRef = useRef(null);
     const text = "Shin Nakamura Products";
+
     useEffect(() => {
         if (!containerRef.current) return;
         const chars = containerRef.current.querySelectorAll('.char');
@@ -17,6 +18,7 @@ const Title = () => {
         });
         return () => entranceAnim.pause();
     }, []);
+
     const handleHover = (e, isEnter) => {
         animate(e.target, {
             translateY: isEnter ? -12 : 0,
@@ -27,17 +29,25 @@ const Title = () => {
             ease: isEnter ? 'outBack' : 'outElastic'
         });
     };
+
+    const words = text.split(' ');
+
     return (
         <h3 ref={containerRef} style={{ margin: 0, textAlign: 'center', padding: '3rem' }}>
-            <style>{`.title-box{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:4.5rem;font-weight:900;letter-spacing:-0.03em;color:#333;}.char{display:inline-block;transform-origin:center bottom;cursor:pointer;will-change:transform,filter,opacity;}`}</style>
+            <style>{`.title-box{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:clamp(2rem,8vw,4.5rem);font-weight:900;letter-spacing:-0.03em;color:#333;}.word{display:inline-block;white-space:nowrap;}.char{display:inline-block;transform-origin:center bottom;cursor:pointer;will-change:transform,filter,opacity;}`}</style>
             <div className="title-box">
-                {text.split('').map((char, i) => (
-                    <span key={i} className="char" style={{ minWidth: char === ' ' ? '1.5rem' : 'auto', opacity: 0 }} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)}>
-                        {char}
+                {words.map((word, wordIndex) => (
+                    <span key={wordIndex} className="word" style={{ marginRight: wordIndex !== words.length - 1 ? '1rem' : '0' }}>
+                        {word.split('').map((char, charIndex) => (
+                            <span key={`${wordIndex}-${charIndex}`} className="char" style={{ opacity: 0 }} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)}>
+                                {char}
+                            </span>
+                        ))}
                     </span>
                 ))}
             </div>
         </h3>
     );
 };
+
 export default Title;

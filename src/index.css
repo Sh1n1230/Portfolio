@@ -4,8 +4,12 @@
   font-weight: 400;
 
   color-scheme: light dark;
+  /* 変更: システム設定を無視し、常にダークモードとして振る舞うよう強制 */
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
+  /* 全体の基本文字色（白） */
   background-color: #242424;
+  /* 全体の基本背景色（黒） */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,9 +34,13 @@ body {
   padding-top: 80px;
 }
 
+/* 修正: コンテンツ領域のh1を想定 */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.2rem;
+  /* emからremに変更（ルート基準にして安定させるため） */
+  line-height: 1.2;
+  word-break: break-word;
+  /* 修正: 単語の途中で画面端に達した場合、強制的に改行させる */
 }
 
 button {
@@ -56,30 +64,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
 .project-grid {
   display: grid;
-  grid-template-columns: auto-fit;
+  grid-template-columns: 1fr;
+  /* 常に1カラム（横幅いっぱい）にする */
   gap: 1.5rem;
   margin-top: 1rem;
 }
 
 .project-card {
   background: white;
+  color: #333;
+  /* 変更: カードの中だけは常に暗い文字色にする */
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
@@ -93,15 +89,10 @@ button:focus-visible {
 
 .project-image {
   width: 100%;
-  /* 横幅をカードの幅に合わせる */
   height: 200px;
-  /* 高さを固定して統一感を出す（任意） */
   object-fit: cover;
-  /* 画像の比率を崩さず、指定したエリアを埋めるようにトリミング表示 */
   border-radius: 6px;
-  /* 画像の角を少し丸くする */
   margin-bottom: 1rem;
-  /* タイトルとの間に余白を空ける */
 }
 
 .carousel-container {
@@ -124,55 +115,40 @@ button:focus-visible {
   object-fit: cover;
 }
 
-/* 左右のボタンの共通スタイル */
 .carousel-button {
   position: absolute;
   top: 50%;
-  /* 上下の中央に配置 */
   transform: translateY(-50%);
-  /* 自身の高さの半分だけ上に戻して完全に中央合わせ */
   background-color: rgba(0, 0, 0, 0.5);
-  /* 半透明の黒背景 */
   color: white;
-  /* 矢印の色は白 */
   border: none;
   cursor: pointer;
   padding: 16px;
   font-size: 18px;
   border-radius: 50%;
-  /* 丸いボタンにする */
   z-index: 10;
-  /* 画像より前面に表示 */
   transition: background-color 0.3s;
 }
 
-/* インジケーター（ドット）のコンテナ */
 .carousel-dots {
   position: absolute;
   bottom: 15px;
-  /* 画像の下部に配置 */
   left: 50%;
   transform: translateX(-50%);
-  /* 左右の中央合わせ */
   display: flex;
   gap: 8px;
-  /* ドット間の隙間 */
   z-index: 10;
 }
 
-/* 個々のドットのスタイル */
 .dot {
   width: 12px;
   height: 12px;
   background-color: rgba(255, 255, 255, 0.5);
-  /* 半透明の白 */
   border-radius: 50%;
-  /* 丸くする */
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-/* 現在表示中のスライドに対応するドットは不透明の白にする */
 .dot.active {
   background-color: white;
 }
@@ -225,4 +201,58 @@ html {
   padding: 4rem 2rem;
   max-width: 800px;
   margin: 0 auto;
+  box-sizing: border-box;
+  /* 修正: paddingを含めて幅を計算させる */
+}
+
+.content-section h2 {
+  color: #333333;
+  /* 【追加】背景が明るいなら、見出しの文字色を暗く固定する */
+}
+
+/* ==========================================
+   モバイル向け（レスポンシブ）スタイル
+========================================== */
+@media (max-width: 768px) {
+
+  /* 修正: App.cssなどにあるかもしれない #root の影響を打ち消す */
+  #root {
+    padding: 1rem !important;
+  }
+
+  /* 修正: 本文中の h1 サイズを小さくする */
+  h1 {
+    font-size: 2rem;
+  }
+
+  /* 修正: ヘッダー内の h1 サイズも少し調整し、優先度を明示 */
+  .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .header {
+    padding: 0 1rem;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .content-section {
+    padding: 3rem 1rem;
+    /* 少し上下の余白も狭めました */
+  }
+
+  .editor-window {
+    margin: 30px 0 0;
+    /* 左右マージンを0に */
+    border-radius: 0;
+    /* 画面幅いっぱいに広げるなら角丸を取るのも手です */
+  }
+
+  .carousel-slide {
+    height: 250px;
+  }
+
+
 }

@@ -30,7 +30,7 @@ export const MyStatus = () => {
 
     return (
         <>
-            <style>{`.hero-status{font-family:'Courier New',monospace;font-size:2rem;font-weight:bold;line-height:1.4;margin:40px 0;color:#333;}.hl{color:#007bff;border-right:3px solid #007bff;padding-right:5px;animation:blink 0.75s step-end infinite;}@keyframes blink{from,to{border-color:transparent}50%{border-color:#007bff;}}.sub{font-size:1.2rem;color:#666;margin-top:10px;}`}</style>
+            <style>{`.hero-status{font-family:'Courier New',monospace;font-size:clamp(1.1rem, 4vw, 2rem);font-weight:bold;line-height:1.4;margin:40px 0;color:#333;}.hl{color:#007bff;border-right:3px solid #007bff;padding-right:5px;animation:blink 0.75s step-end infinite;}@keyframes blink{from,to{border-color:transparent}50%{border-color:#007bff;}}.sub{font-size:clamp(0.9rem, 3vw, 1.2rem);color:#666;margin-top:10px;}`}</style>
             <div className="hero-status">
                 <div>こんにちは、私は2028年卒の学生です。</div>
                 <div>現在、<span className="hl">{text}</span></div>

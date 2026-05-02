@@ -364,6 +364,17 @@ a:focus:not(:focus-visible) {
     blinkInfinite 0.8s step-end infinite calc(var(--i) * 0.7s);
 }
 
+/* フッターの「Produced by:」などの文字色を明るくする */
+.footer-credits {
+  color: #a8b2d1;
+  /* 薄いブルーグレー（お好みで #ffffff など） */
+}
+
+/* 最終更新日の文字色を明るくする */
+.last-updated p {
+  color: #a8b2d1;
+}
+
 @keyframes showLine {
   to {
     opacity: 1;
