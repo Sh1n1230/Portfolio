@@ -94,6 +94,18 @@ button:focus-visible {
   margin-bottom: 1rem;
 }
 
+.project-category-group {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.project-category-group h3 {
+  color: #333;
+}
+
 .carousel-container {
   width: 100%;
   max-width: 800px;

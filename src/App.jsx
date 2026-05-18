@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import './App.css'
 import LastUpdated from './components/LastUpdated'
 import Title from './components/Title'
@@ -20,6 +20,10 @@ function App() {
   const [showMain, setShowMain] = useState(false)
 
   const images = ["./images/escapegym/escapegym_1.png", "./images/escapegym/escapegym_2.png", "./images/escapegym/escapegym_3.png"]
+
+  const categories = useMemo(() => {
+    return [...new Set(projectsData.map(p => p.category))]
+  }, [])
 
   useEffect(() => {
     if (!showMain) return;
@@ -77,10 +81,17 @@ function App() {
             <FadeIn>
               <section id="projects" className="content-section">
                 <h2>Projects</h2>
-                <div className="project-grid">
-                  {projectsData.map(project => <ProjectCard key={project.id} project={project} />)}
-                  <NextComingSoon />
-                </div>
+                {categories.map(category => (
+                  <div key={category} className="project-category-group">
+                    <h3>{category}</h3>
+                    <div className="project-grid">
+                      {projectsData.filter(p => p.category === category).map(project => (
+                        <ProjectCard key={project.id} project={project} />
+                      ))}
+                      {category === 'Game' && <NextComingSoon />}
+                    </div>
+                  </div>
+                ))}
               </section>
             </FadeIn>
 
