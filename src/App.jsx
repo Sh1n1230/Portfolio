@@ -5,6 +5,7 @@ import Title from './components/Title'
 import FadeIn from './components/FadeIn'
 import NextComingSoon from './components/NextComingSoon'
 import Welcome from './components/Welcome'
+import Shutter from './components/Shutter'
 import { ProjectCard } from './components/ProjectCard'
 import { projectsData } from './data/projects'
 import reactLogo from './assets/react.svg'
@@ -12,12 +13,17 @@ import viteLogo from '/vite.svg'
 import { editorFiles } from './data/editorFiles'
 import { MyStatus } from './components/MyStatus';
 import { GlobalBackground } from './components/GlobalBackground';
+import { SHUTTER_MODE } from './config';
 
 function App() {
   const [activeFile, setActiveFile] = useState('profile.js')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [showMain, setShowMain] = useState(false)
+  const [phase, setPhase] = useState('welcome') // 'welcome' | 'shutter' | 'main'
+
+  const handleWelcomeFinished = () => {
+    setPhase(SHUTTER_MODE ? 'shutter' : 'main');
+  };
 
   const images = ["./images/escapegym/escapegym_1.png", "./images/escapegym/escapegym_2.png", "./images/escapegym/escapegym_3.png"]
 
@@ -26,10 +32,10 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!showMain) return;
+    if (phase !== 'main') return;
     const timer = setInterval(() => setCurrentSlide(p => (p + 1) % images.length), 3000)
     return () => clearInterval(timer)
-  }, [images.length, showMain])
+  }, [images.length, phase])
 
   const goToSlide = (index) => setCurrentSlide(index)
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
@@ -37,9 +43,10 @@ function App() {
 
   return (
     <>
-      {!showMain && <Welcome onFinished={() => setShowMain(true)} />}
+      {phase === 'welcome' && <Welcome onFinished={handleWelcomeFinished} />}
+      {phase === 'shutter' && <Shutter />}
 
-      {showMain && (
+      {phase === 'main' && (
         <>
           <GlobalBackground />
 
