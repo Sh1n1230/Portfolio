@@ -6,4 +6,4 @@ export const SHUTTER_MODE = true;
 //   公開後:       'https://xxx.up.railway.app' などのデプロイURLに差し替え
 //   '' （空文字）にするとウィジェット自体を無効化（非表示）にできる
 // ※ サーバーが起動していない／到達できない場合はウィジェットを自動で隠す
-export const SPOTIFY_API_BASE = 'http://localhost:3000';
+export const SPOTIFY_API_BASE = 'https://spotify-embedded.onrender.com';
