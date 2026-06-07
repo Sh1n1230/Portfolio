@@ -13,6 +13,7 @@ import viteLogo from '/vite.svg'
 import { editorFiles } from './data/editorFiles'
 import { MyStatus } from './components/MyStatus';
 import { GlobalBackground } from './components/GlobalBackground';
+import { NowPlaying } from './components/NowPlaying';
 import { SHUTTER_MODE } from './config';
 
 function App() {
@@ -44,11 +45,13 @@ function App() {
   return (
     <>
       {phase === 'welcome' && <Welcome onFinished={handleWelcomeFinished} />}
-      {phase === 'shutter' && <Shutter />}
+      {phase === 'shutter' && <Shutter onOpened={() => setPhase('main')} />}
 
       {phase === 'main' && (
         <>
           <GlobalBackground />
+
+          <NowPlaying />
 
           <button
             className={`hamburger-btn ${isMenuOpen ? 'open' : ''}`}

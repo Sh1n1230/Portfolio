@@ -24,8 +24,14 @@
     height: 100vh;
     z-index: 10000;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.2rem;
+
+    /* 叩けることを示す */
+    cursor: pointer;
+    user-select: none;
 
     /* 横スラット（羽板）パターン */
     background-color: #919191;
@@ -95,4 +101,37 @@
     /* GSAP autoAlpha で制御 */
     visibility: hidden;
     opacity: 0;
+}
+
+/* 「叩いてみて」ヒント */
+.shutter-hint {
+    margin: 0;
+    padding: 0 1.6rem;
+    text-align: center;
+
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.9),
+        0 0 16px rgba(0, 0, 0, 0.5);
+
+    /* やわらかな明滅で「触れる」ことを示唆 */
+    animation: shutter-hint-pulse 1.8s ease-in-out infinite;
+
+    /* GSAP autoAlpha で制御 */
+    visibility: hidden;
+    opacity: 0;
+}
+
+@keyframes shutter-hint-pulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .shutter-hint {
+        animation: none;
+    }
 }

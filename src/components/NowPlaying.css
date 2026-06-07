@@ -1,0 +1,175 @@
+/*
+ * 右上「再生中」ウィジェット。
+ * ハンバーガーメニュー（top:20px / right:25px）の左隣に固定配置する。
+ */
+.now-playing {
+    position: fixed;
+    top: 14px;
+    right: 72px;
+    z-index: 998;
+    /* メニューオーバーレイ(z:999)より下 → メニューを開くと隠れる */
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 260px;
+    padding: 8px 12px 8px 8px;
+
+    background: rgba(18, 18, 18, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(29, 185, 84, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+    color: #ffffff;
+    text-decoration: none;
+
+    animation: np-in 0.5s ease-out;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.now-playing:hover {
+    transform: translateY(-2px);
+    border-color: rgba(29, 185, 84, 0.85);
+}
+
+.np-art {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+}
+
+/* テキスト列。min-width:0 で省略(...)を効かせる */
+.np-info {
+    min-width: 0;
+}
+
+.np-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
+}
+
+.np-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #1db954;
+}
+
+.np-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.np-artist {
+    font-size: 0.72rem;
+    line-height: 1.25;
+    color: #b3b3b3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.np-mood {
+    margin-top: 2px;
+    font-size: 0.68rem;
+    line-height: 1.25;
+    font-style: italic;
+    color: #8dd1a8;
+    /*
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    */
+}
+
+/* 再生中を示すイコライザーバー */
+.np-eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 10px;
+}
+
+.np-eq i {
+    width: 2px;
+    background: #1db954;
+    transform-origin: bottom;
+    animation: np-eq 0.9s ease-in-out infinite;
+}
+
+.np-eq i:nth-child(1) {
+    height: 40%;
+    animation-delay: 0s;
+}
+.np-eq i:nth-child(2) {
+    height: 80%;
+    animation-delay: 0.2s;
+}
+.np-eq i:nth-child(3) {
+    height: 55%;
+    animation-delay: 0.4s;
+}
+
+@keyframes np-eq {
+    0%,
+    100% {
+        transform: scaleY(0.4);
+    }
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes np-in {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* 狭い画面ではコンパクトに（mood は省略） */
+@media (max-width: 600px) {
+    .now-playing {
+        top: 12px;
+        right: 66px;
+        max-width: 170px;
+        padding: 6px 10px 6px 6px;
+        gap: 8px;
+    }
+
+    .np-art {
+        width: 36px;
+        height: 36px;
+    }
+
+    .np-mood {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .now-playing {
+        animation: none;
+    }
+    .np-eq i {
+        animation: none;
+    }
+}
